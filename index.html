@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Word Calculator</title>
+  <meta name="description" content="A calculator for words: add and subtract word vectors, like king − man + woman ≈ queen.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=VT323&display=swap">
+  <link rel="stylesheet" href="src/styles.css">
+  <script type="module" src="src/app.js"></script>
+</head>
+<body>
+  <main class="device">
+    <header class="brand">
+      <h1>LEXICON</h1>
+      <span id="model">WORD VECTOR</span>
+    </header>
+
+    <section class="lcd" aria-live="polite" aria-label="Display">
+      <div class="lcd-expr" id="expr">LOADING</div>
+      <div class="lcd-result" id="result">_</div>
+      <div class="lcd-sub" id="sub">FETCHING WORDS…</div>
+    </section>
+
+    <div class="field">
+      <label for="word">WORD</label>
+      <input id="word" type="text" placeholder="type a word" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="24" enterkeyhint="go">
+    </div>
+
+    <div class="keys">
+      <button type="button" class="key key-clear" data-action="clear" aria-label="Clear">C</button>
+      <button type="button" class="key key-back" data-action="back" aria-label="Backspace">
+        <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 5H9l-6 7 6 7h11a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1z"/><path d="M12 9l5 6"/><path d="M17 9l-5 6"/></svg>
+      </button>
+      <button type="button" class="key key-op" data-action="minus" aria-label="Minus">−</button>
+      <button type="button" class="key key-op" data-action="plus" aria-label="Plus">+</button>
+      <button type="button" class="key key-word" data-slot="0"></button>
+      <button type="button" class="key key-word" data-slot="1"></button>
+      <button type="button" class="key key-word" data-slot="2"></button>
+      <button type="button" class="key key-word" data-slot="3"></button>
+      <button type="button" class="key key-word" data-slot="4"></button>
+      <button type="button" class="key key-word" data-slot="5"></button>
+      <button type="button" class="key key-equals" data-action="equals" aria-label="Equals">=</button>
+    </div>
+
+    <p class="caption">WORD KEYS RECALL YOUR RECENT WORDS</p>
+  </main>
+
+  <footer class="credits">
+    <p>Type a word, press + or −, then = or Enter.</p>
+    <p>
+      Vectors: <a href="https://nlp.stanford.edu/projects/glove/">GloVe</a> (Pennington, Socher and Manning, 2014), public domain.
+      <a href="https://github.com/ethank64/word-calculator">Source on GitHub</a>
+    </p>
+  </footer>
+</body>
+</html>

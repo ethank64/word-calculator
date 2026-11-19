@@ -1,0 +1,189 @@
+:root {
+  --page: #2c2b28;
+  --page-text: #c9c3b5;
+  --page-link: #e8c9a0;
+  --body: #d8d2c4;
+  --ink: #1f1e1c;
+  --ink-soft: #4a463d;
+  --lcd: #a9b89a;
+  --lcd-edge: #6f7a63;
+  --lcd-ink: #1e2619;
+  --field: #f3f0e8;
+  --field-edge: #8c8676;
+  --key-word: #3a3936;
+  --key-word-edge: #1f1e1c;
+  --key-op: #b93c0a;
+  --key-op-edge: #7c2906;
+  --key-clear: #8a2c1b;
+  --key-clear-edge: #5c1d12;
+  --key-back: #5b574e;
+  --key-back-edge: #3a3731;
+  --key-eq: #1f1e1c;
+  --key-eq-edge: #000000;
+  --mono: 'Space Mono', ui-monospace, monospace;
+  --pixel: 'VT323', ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--page);
+  color: var(--page-text);
+  font-family: var(--mono);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 24px 16px;
+}
+
+.device {
+  width: 100%;
+  max-width: 420px;
+  padding: 28px;
+  background: var(--body);
+  color: var(--ink);
+  border-radius: 18px;
+  border-bottom: 8px solid #b3ac9c;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.brand {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.brand h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 4px;
+}
+.brand span {
+  font-size: 11px;
+  color: var(--ink-soft);
+  letter-spacing: 1px;
+}
+
+.lcd {
+  background: var(--lcd);
+  border: 3px solid var(--lcd-edge);
+  border-radius: 6px;
+  padding: 14px 16px;
+  color: var(--lcd-ink);
+  font-family: var(--pixel);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  overflow: hidden;
+}
+.lcd-expr { font-size: 24px; line-height: 1; height: 24px; white-space: nowrap; }
+.lcd-result { font-size: 72px; line-height: 1; height: 72px; white-space: nowrap; }
+.lcd-result.is-long { font-size: 54px; line-height: 72px; }
+.lcd-result.is-longer { font-size: 40px; line-height: 72px; }
+/* The match line keeps its start (the main score) and trims the runners-up. */
+.lcd-sub {
+  font-size: 20px;
+  line-height: 1.1;
+  height: 22px;
+  width: 100%;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.lcd.is-error .lcd-sub { text-decoration: underline; }
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.field label {
+  font-size: 11px;
+  color: var(--ink-soft);
+  letter-spacing: 2px;
+}
+.field input {
+  height: 48px;
+  padding: 0 14px;
+  background: var(--field);
+  border: 2px solid var(--field-edge);
+  border-radius: 4px;
+  font-family: var(--mono);
+  font-size: 18px;
+  color: var(--ink);
+}
+.field input::placeholder { color: #5e5a50; }
+.field input:focus-visible { outline: 3px solid var(--key-op); outline-offset: 2px; }
+
+.keys {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.key {
+  height: 56px;
+  padding: 0 2px;
+  border: none;
+  border-radius: 6px;
+  color: #ffffff;
+  font-family: var(--mono);
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 60ms ease, border-bottom-width 60ms ease;
+}
+.key:active {
+  transform: translateY(3px);
+  border-bottom-width: 2px;
+}
+.key:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+
+.key-clear { background: var(--key-clear); border-bottom: 5px solid var(--key-clear-edge); font-size: 18px; font-weight: 700; }
+.key-back { background: var(--key-back); border-bottom: 5px solid var(--key-back-edge); }
+.key-op { background: var(--key-op); border-bottom: 5px solid var(--key-op-edge); font-size: 26px; font-weight: 700; }
+.key-word { background: var(--key-word); border-bottom: 5px solid var(--key-word-edge); font-size: 13px; }
+.key-word:empty { cursor: default; }
+.key-equals { grid-column: span 2; background: var(--key-eq); border-bottom: 5px solid var(--key-eq-edge); font-size: 26px; font-weight: 700; }
+
+.caption {
+  margin: 0;
+  font-size: 11px;
+  color: var(--ink-soft);
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.credits {
+  max-width: 420px;
+  font-size: 12px;
+  line-height: 1.6;
+  text-align: center;
+}
+.credits p { margin: 0; }
+.credits a { color: var(--page-link); }
+.credits a:hover { color: #ffffff; }
+
+@media (max-width: 440px) {
+  .lcd-sub { font-size: 17px; }
+  .lcd-expr { font-size: 20px; }
+}
+
+@media (max-width: 380px) {
+  .device { padding: 20px; }
+  .lcd-result { font-size: 56px; }
+  .lcd-result.is-long { font-size: 42px; }
+  .lcd-result.is-longer { font-size: 32px; }
+}

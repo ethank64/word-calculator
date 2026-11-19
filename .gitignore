@@ -1,0 +1,7 @@
+.DS_Store
+.claude/
+node_modules/
+__pycache__/
+# Raw GloVe downloads are large; only the trimmed files in data/ are committed.
+glove*.zip
+glove*.txt

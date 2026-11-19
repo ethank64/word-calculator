@@ -1,0 +1,8 @@
+{
+  "words": 50000,
+  "dims": 100,
+  "format": "int8",
+  "source": "glove.6B.100d.txt",
+  "sourceUrl": "https://nlp.stanford.edu/projects/glove/",
+  "license": "Public Domain Dedication and License v1.0 (PDDL)"
+}
