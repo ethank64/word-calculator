@@ -7,6 +7,8 @@ king − man + woman   ≈ queen
 paris − france + italy ≈ rome
 ```
 
+**Try it: https://ethank64.github.io/word-calculator/**
+
 It runs entirely in your browser: a static page, no server, no build step, no dependencies.
 
 ## How it works
