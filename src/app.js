@@ -242,19 +242,28 @@ function absorbOperators(text) {
 async function fetchWithProgress(url, onProgress) {
   const response = await fetch(url);
   if (!response.ok) throw new Error(`${url}: ${response.status}`);
+  // When the server compresses the file (GitHub Pages does), content-length is
+  // the compressed size, smaller than what the reader hands back. So collect
+  // chunks without trusting it, and use it only for a rough progress figure.
   const total = Number(response.headers.get('content-length')) || 0;
-  if (!response.body || !total) return response.arrayBuffer();
+  if (!response.body) return response.arrayBuffer();
   const reader = response.body.getReader();
-  const bytes = new Uint8Array(total);
+  const chunks = [];
   let received = 0;
   for (;;) {
     const { done, value } = await reader.read();
     if (done) break;
-    bytes.set(value, received);
+    chunks.push(value);
     received += value.length;
-    onProgress(received / total);
+    if (total) onProgress(Math.min(received / total, 0.99));
   }
-  return bytes.buffer.slice(0, received);
+  const bytes = new Uint8Array(received);
+  let offset = 0;
+  for (const chunk of chunks) {
+    bytes.set(chunk, offset);
+    offset += chunk.length;
+  }
+  return bytes.buffer;
 }
 
 async function load() {
